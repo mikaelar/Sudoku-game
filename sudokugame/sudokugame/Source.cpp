@@ -1,6 +1,26 @@
 #include<iostream>
 using namespace std;
 const int N = 9;
+const int SYMBOL = '_';
+
+void print(int myArr[N][N], int number, char symbol) {
+	if (number == 0) {
+		cout << "You can' t insert zero!";
+	}
+	else
+	{
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				if (myArr[i][j] == 0) {
+					cout << symbol << " ";
+				}
+				else
+					cout << myArr[i][j] << " ";
+			}
+			cout << endl;
+		}
+	}
+}
 
 
 int main() {
