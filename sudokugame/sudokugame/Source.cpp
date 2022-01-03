@@ -3,7 +3,7 @@ using namespace std;
 const int N = 9;
 const int SYMBOL = '_';
 
-void print(int myArr[N][N], int number, char symbol) {
+void print(int myArr[N][N], int number, char symbol) { 
 	if (number == 0) {
 		cout << "You can' t insert zero!";
 	}
@@ -22,6 +22,27 @@ void print(int myArr[N][N], int number, char symbol) {
 	}
 }
 
+bool isCorrect(int myArr[N][N], int row, int column, int number) {
+
+	for (int i = 0; i < N; i++) {
+		if (myArr[i][column] == number) {
+			return false;
+		}
+	}
+	for (int i = 0; i < N; i++) {
+		if (myArr[row][i] == number) {
+			return false;
+		}
+	}
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			if (myArr[i + (row - row % 3)][j + (column - column % 3)] == number) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
 
 int main() {
 	int easy_first[N][N] = 
