@@ -1,13 +1,30 @@
+/**
+*
+* Solution to course project # 6
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2021/2022
+*
+* @author Mikaela Rumenova Ezekieva
+* @idnumber 1MI0600003
+* @compiler VC
+*
+* <cpp file with all the functions, neccessary for the game>
+*
+*/
+
 #include<iostream>
 #include<fstream>
 using namespace std;
-const int N = 9;
+const int N = 9; //counter for the number of rows and columns 
+const int NUMBER_OF_DIFFICULTIES = 15;
 const int SYMBOL = '_';
-const int EASY = 1;
-const int MEDIUM = 2;
-const int HARD = 3;
+const int EASY = 1; //first level of difficulty
+const int MEDIUM = 2; //second level of difficulty
+const int HARD = 3; //third level of difficulty
 
-void print(int random,int myArr[15][N][N], int number, char symbol,int row,int column) { 
+//function to print the sudoku every time
+void print(int random,int myArr[NUMBER_OF_DIFFICULTIES][N][N], int number, char symbol,int row,int column) {
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -21,7 +38,8 @@ void print(int random,int myArr[15][N][N], int number, char symbol,int row,int c
 		}
 }
 
-bool isReady(int myArr[15][N][N], int row, int column, int number, int random) {
+//function to check whether the sudoku is ready
+bool isReady(int myArr[NUMBER_OF_DIFFICULTIES][N][N], int row, int column, int number, int random) {
 
 	int counterReady = 0;
 	for (int i = 0; i < N; i++) {
@@ -37,7 +55,8 @@ bool isReady(int myArr[15][N][N], int row, int column, int number, int random) {
 	return false;
 }
 
-bool isCorrect(int myArr[15][N][N], int row, int column, int number,int random) {
+//function to check whether the input number is correct for the position that is pointed out
+bool isCorrect(int myArr[NUMBER_OF_DIFFICULTIES][N][N], int row, int column, int number,int random) {
 
 	for (int i = 0; i < N; i++) {
 		if (myArr[random][i][column] == number&&number!=0) {
@@ -64,7 +83,7 @@ int main() {
 	int input;
 	ifstream sudokuFile;
 	sudokuFile.open("sudoku.txt");
-	long int sudokuArray[15][N][N];
+	long int sudokuArray[NUMBER_OF_DIFFICULTIES][N][N];
 	for (int i = 0; i < 15 && !sudokuFile.eof(); i++) {
 		for (int j = 0; j < N && !sudokuFile.eof(); j++) {
 			for (int m = 0; m < N && !sudokuFile.eof(); m++) {
@@ -75,17 +94,17 @@ int main() {
 	}
 	sudokuFile.close();
 
-	//from 0 to 4
+	//sudokus number in the file: from 0 to 4
 	int randomEasy;
 	srand(time(NULL));
 	randomEasy = rand() % 5 + 0;
 
-	//from 5 to 9
+	//sudokus number in the file: from 5 to 9
 	int randomMedium;
 	srand(time(NULL));
 	randomMedium = rand() % 5 + 5;
 
-	//from 10 to 14
+	//sudokus number in the file: from 10 to 14
 	int randomHard;
 	srand(time(NULL));
 	randomHard = rand() % 5 + 10;
@@ -124,7 +143,7 @@ int main() {
 		cout << endl;
 	}
 
-	int anotherArr[15][N][N];
+	int anotherArr[NUMBER_OF_DIFFICULTIES][N][N];
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
 			anotherArr[random][i][j] = sudokuArray[random][i][j];
@@ -141,8 +160,8 @@ int main() {
 	cin >> number;
 	cout << endl;
 
-	if (row < 0 || row > 9 || column < 0 || column>9 || number > 9 || number < 0) {
-		while (row < 0 || row > 9 || column < 0 || column>9 || number > 9 || number < 0) {
+	if (row < 0 || row > N || column < 0 || column> N || number > N || number < 0) {
+		while (row < 0 || row > N || column < 0 || column> N || number > N || number < 0) {
 			cout << "Please insert correct data:";
 			cout << endl;
 			cout << "Insert a row: ";
@@ -173,8 +192,8 @@ int main() {
 			cin >> number;
 			cout << endl;
 
-			if (row < 0 || row > 9 || column < 0 || column>9 || number > 9 || number < 0) {
-				while (row < 0 || row > 9 || column < 0 || column>9 || number > 9 || number < 0) {
+			if (row < 0 || row > N || column < 0 || column> N || number > N || number < 0) {
+				while (row < 0 || row > N || column < 0 || column>N || number > N || number < 0) {
 					cout << endl;
 					cout << "Please insert correct data:";
 					cout << endl;
@@ -202,8 +221,8 @@ int main() {
 				cin >> number;
 				cout << endl;
 
-				if (row < 0 || row > 9 || column < 0 || column>9 || number > 9 || number < 0) {
-					while (row < 0 || row > 9 || column < 0 || column>9 || number > 9 || number < 0) {
+				if (row < 0 || row > N || column < 0 || column> N || number > N || number < 0) {
+					while (row < 0 || row > N || column < 0 || column> N || number > N || number < 0) {
 						cout << endl;
 						cout << "Please insert correct data:";
 						cout << endl;
